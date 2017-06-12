@@ -79,16 +79,16 @@ Date Object
 - Declare a variable 'todayIs'.
 - Using the date constructor, it should print today's date.
 **************************************************************************************/
-(function(testerOne){
-  "use strict";
-  var todayIs = new Date();
-  console.log(todayIs);
-  console.assert(todayIs == today, "#3 Test failed. Did you set the date correctly?");
-})(testerOne);
 
-
-
-
+//
+// (function(testerOne){
+//   "use strict";
+//   var todayIs = new Date();
+//   console.log(todayIs);
+//   console.assert(todayIs == today, "#3 Test failed. Did you set the date correctly?");
+// })(testerOne);
+//
+//
 
 
 /**************************************************************************************
@@ -123,22 +123,31 @@ Hoisting
 - Set 'birthday' to an integer for April 21, 1983.
 - There are a couple of hoisting issues in this exercise. Fix them to make the assertion pass.
 **************************************************************************************/
+// (function(){
+//   "use strict";
+//   var date = new Date(birthday);
+//   var birthday;
+//   bdayMsg();
+//   var bdayMsg = function(){
+//     return "You were born on " + date.toDateString();
+//   }
+//   console.log("#5 bdayMsg()", bdayMsg());
+//   console.assert(bdayMsg() == "You were born on Thu Apr 21 1983", "#5 Test failed. Check function hoisting." )
+// })();
+
 (function(){
   "use strict";
+  var birthday = 419752800000;
   var date = new Date(birthday);
-  var birthday;
-  bdayMsg();
+
   var bdayMsg = function(){
     return "You were born on " + date.toDateString();
   }
+
+  bdayMsg();
   console.log("#5 bdayMsg()", bdayMsg());
   console.assert(bdayMsg() == "You were born on Thu Apr 21 1983", "#5 Test failed. Check function hoisting." )
 })();
-
-
-
-
-
 
 /**************************************************************************************
 # 6
@@ -146,13 +155,13 @@ Date object
 - Declare a variable: 'stringDate'.
 - Set the value of 'stringDate' to be a string of today's date.
 **************************************************************************************/
-(function(testerTwo){
-  "use strict";
-  var today = new Date();
-  console.log("#6 stringDate", stringDate)
-  console.assert(stringDate == testerTwo, "#6 Test Failed. Did you set stringDate correctly?")
-})(testerTwo);
-
+// (function(testerTwo){
+//   "use strict";
+//   var today = new Date();
+//   console.log("#6 stringDate", stringDate)
+//   console.assert(stringDate == testerTwo, "#6 Test Failed. Did you set stringDate correctly?")
+// })(testerTwo);
+//
 
 
 
@@ -173,7 +182,7 @@ Hoisting
 (function(){
   "use strict";
 
-  pizza.pizzaMkr();
+
 
   var pizza = {
     sauce: "",
@@ -187,6 +196,8 @@ Hoisting
       }
     }
   }
+
+  pizza.pizzaMkr();
 
   console.log("# 7 pizza.pizzaMrk()", pizza.pizzaMkr());
   console.assert(pizza.pizzaMkr() == "We are making your pizza with tomato and chicken. Pickup in 20 minutes.", "#7 Test failed. Did you add the propeties? Did you set the values correctly? Did you fix the hoisting issues?")

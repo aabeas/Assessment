@@ -172,8 +172,8 @@ Date object
 Object notation
 Hoisting
 - Using dot notation, do the following:
-  - add a property of "sauceType" with a value of "tomato".
-  - add a property of "protien" with a value of "chicken".
+x  - add a property of "sauceType" with a value of "tomato".
+x  - add a property of "protien" with a value of "chicken".
   - add a propety of "orderNow" with a value of that would make it pass the assertion.
   - add a property of "sauce" with a value of that would make it pass the assertion.
 - Fix hoisting issues
@@ -182,25 +182,26 @@ Hoisting
 (function(){
   "use strict";
 
-
-
   var pizza = {
-    sauce: "",
-    orderNow: "",
-    pizzaMkr: function(){
-      if (pizza.orderNow == true && pizza.sauce == true){
-        return "We are making your pizza with " + this.sauceType + " and " + this.protein + ". Pickup in 20 minutes."
+    sauce: true,
+    orderNow: true
+  }
+  pizza.sauceType = "tomato";
+  pizza.protein = "chicken";
+
+    function pizzaMkr(){
+      if (pizza.orderNow === true && pizza.sauce === true){
+        return "We are making your pizza with " + pizza.sauceType + " and " + pizza.protein + ". Pickup in 20 minutes."
       }
       else {
         return "We only make traditional pizzas. You gotta add some sauce!"
       }
-    }
   }
 
-  pizza.pizzaMkr();
+  pizzaMkr();
 
-  console.log("# 7 pizza.pizzaMrk()", pizza.pizzaMkr());
-  console.assert(pizza.pizzaMkr() == "We are making your pizza with tomato and chicken. Pickup in 20 minutes.", "#7 Test failed. Did you add the propeties? Did you set the values correctly? Did you fix the hoisting issues?")
+  console.log("# 7 pizza.pizzaMrk()", pizzaMkr());
+  console.assert(pizzaMkr() === "We are making your pizza with tomato and chicken. Pickup in 20 minutes.", "#7 Test failed. Did you add the propeties? Did you set the values correctly? Did you fix the hoisting issues?")
 })();
 
 
@@ -211,12 +212,12 @@ Hoisting
 Scope
 Hoisting
 Object notation
-- Study the code below, line by line, carefully. Keep hoisting and scope in mind.
-- Add the following properties to 'benefit' using bracket notation:
-  - "credit" with a value of 50.
-  - "discount" with a value of 5.
+x - Study the code below, line by line, carefully. Keep hoisting and scope in mind.
+x - Add the following properties to 'benefit' using bracket notation:
+x - "credit" with a value of 50.
+x - "discount" with a value of 5.
 - Complete the missing return statement.
-- 'name' must be set to 'James' as a local variable in one of the functions. It should also change the global variable in order for the assertion to pass.
+x - 'name' must be set to 'James' as a local variable in one of the functions. It should also change the global variable in order for the assertion to pass.
 -It should return: "Hello James. Here is the status of your account. Thank you for your loyalty. You've been a member for 18 months . You next bill will reflect a $50 credit and a 5% discount going forward."
 HINTS:
 - Don't be overwhelmed by the length of the function. Read the instructions carefully. Read it line by line, keeping hoisting and scope in mind. You've got this.
@@ -227,61 +228,66 @@ HINTS:
 (function() {
   "use strict";
 
-  var goodStanding = false;
-  var monthsActive = 2;
+  var goodStanding = true;
+  var monthsActive = 18;
 
   //Do not modify 'name' globaly.
-  var name = null;
+  var name = "";
+  var benefit = {};
+  //Add properties to 'benefit' using braket notation
+
+  benefit["credit"]=50;
+  benefit['discount']=5;
 
   accountCheck();
 
-  var benefit = {}
-  //Add properties to 'benefit' using braket notation
+  function accountCheck() {
 
-  var accountCheck = function() {
+    function greeting() {
 
-    var greeting = function() {
+      name = "James";
 
-      return "Hello " + name + ". Here is the status of your account."
+      return "Hello " + name + ". Here is the status of your account.";
     }
 
     function accountStat() {
 
-      if (goodStanding == true && monthsActive >= 12) {
+      if (goodStanding === true && monthsActive >= 12) {
 
         return offerDiscount(name);
 
-      } else if (goodStanding == false) {
+      } else if (goodStanding === false) {
 
-        return "Please make a payment within 7 days or your service will be terminated, forever."
+        return "Please make a payment within 7 days or your service will be terminated, forever.";
 
       } else if (monthsActive <= 12) {
 
         var timeFrame = 12 - monthsActive;
         var months;
 
-        if (timeFrame == 1) {
+        if (timeFrame === 1) {
 
           months = "month";
         } else {
 
-          months = "months"
+          months = "months";
         }
 
-        return "You are " + timeFrame + " " + months + " from getting a special discount!"
+        return "You are " + timeFrame + " " + months + " from getting a special discount!";
       }
 
       function offerDiscount() {
 
-        return "Thank you for your loyalty. You've been a member for " + monthsActive + " " + "months . You next bill will reflect a $" + benefit.credit + " credit and a " + benefit.discount + "% discount going forward.";
+        return "Thank you for your loyalty. You've been a member for " + monthsActive + " " + "months . Your next bill will reflect a $" + benefit.credit + " credit and a " + benefit.discount + "% discount going forward.";
       }
     }
     //Here 'accountCheck' should return both the 'greeting' output and the 'accountStat' output.
+    return `${greeting()} ${accountStat()}`;
   }
 
   console.log("#8 accountCheck():", accountCheck());
-  console.assert(name == "James", "Test failed. You should set 'name' to 'james' from within accountCheck()");
-  console.assert(accountCheck() == "Hello James. Here is the status of your account. Thank you for your loyalty. You've been a member for 18 months . You next bill will reflect a $50 credit and a 5% discount going forward.", "Test failed. It returned: " + accountCheck());
+  console.assert(name === "James", "Test failed. You should set 'name' to 'james' from within accountCheck()");
+  console.assert(accountCheck() === "Hello James. Here is the status of your account. Thank you for your loyalty. You've been a member for 18 months . Your next bill will reflect a $50 credit and a 5% discount going forward.", "Test failed. It returned: " + accountCheck());
 
 })();
 
@@ -299,11 +305,11 @@ Compartmentalization
   const multiply = 2 * 8;
 
   function duplicate() {
-     let multiply = 2 * 10;
+     var multiply = 2 * 10
   };
 
   duplicate();
 
   console.log( "multiply", multiply );
-  console.assert( multiply == 16, "Test failed. How can we isolate duplication()" );
+  console.assert( multiply === 16, "Test failed. How can we isolate duplication()" );
 })();
